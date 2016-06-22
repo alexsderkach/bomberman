@@ -1,0 +1,27 @@
+plugins {
+    id 'com.moowork.node' version '0.12'
+}
+
+apply plugin: 'java'
+apply plugin: 'com.moowork.node'
+
+node {
+    version = '5.8.0'
+    npmVersion = '3.7.3'
+    download = true
+    workDir = file("${project.buildDir}/nodejs")
+}
+
+jar {
+    from "$buildDir/assets"
+    includeEmptyDirs = false
+}
+
+task npmBuild(dependsOn: npmInstall, type: NpmTask) {
+    inputs.dir "src"
+    inputs.file "gulpfile.babel.js"
+    outputs.dir "${project.buildDir}/assets"
+    args = ['run', 'build']
+}
+
+jar.dependsOn npmBuild

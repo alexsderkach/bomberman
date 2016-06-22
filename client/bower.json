@@ -1,0 +1,12 @@
+{
+  "name": "client",
+  "description": "bower components for UI.",
+  "dependencies": {
+    "jquery": "latest"
+  },
+  "overrides": {
+    "jquery": {
+      "ignore": ["src/**"]
+    }
+  }
+}
